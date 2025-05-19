@@ -61,11 +61,11 @@ async fn tunnel(req: Request, mut cx: RouteContext<Config>) -> Result<Response> 
         
         if proxy_kv_str.len() == 0 {
             console_log!("getting proxy kv from github...");
-            let req = Fetch::Url(Url::parse("https://raw.githubusercontent.com/FoolVPN-ID/Nautica/refs/heads/main/kvProxyList.json")?);
+            let req = Fetch::Url(Url::parse("https://raw.githubusercontent.com/datayumiwandi/shiroko/refs/heads/main/Data/Alive.json")?);
             let mut res = req.send().await?;
             if res.status_code() == 200 {
                 proxy_kv_str = res.text().await?.to_string();
-                kv.put("proxy_kv", &proxy_kv_str)?.expiration_ttl(60 * 60 * 24).execute().await?; // 24 hours
+                kv.put("proxy_kv", &proxy_kv_str)?.expiration_ttl(60 * 60 * 6).execute().await?; // 6 hours
             } else {
                 return Err(Error::from(format!("error getting proxy kv: {}", res.status_code())));
             }
@@ -124,7 +124,7 @@ fn link(_: Request, cx: RouteContext<Config>) -> Result<Response> {
             "net": "ws",
             "type": "none",
             "host": host,
-            "path": "/KR",
+            "path": "/SG",
             "tls": "",
             "sni": "",
             "alpn": ""}
