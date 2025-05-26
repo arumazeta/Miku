@@ -15,6 +15,6 @@ command = "cargo install worker-build && worker-build --release"
 build = { command = "cargo install worker-build && worker-build --dev" }
 
 [vars]
-UUID = "d5493e2a-512e-4af8-8436-a1e85276b692"
-MAIN_PAGE_URL = "https://raw.githubusercontent.com/mayumikawai/Yumi-siren/refs/heads/master/web/index.html"
-SUB_PAGE_URL = "https://raw.githubusercontent.com/mayumikawai/Yumi-siren/refs/heads/master/web/sub.html"
+UUID = "7209ff68-d4e8-4f8b-b7e5-c1e241316870"
+MAIN_PAGE_URL = "https://raw.githubusercontent.com/kurumiyumi/Maquia/refs/heads/master/web/index.html"
+SUB_PAGE_URL = "https://raw.githubusercontent.com/kurumiyumi/Maquia/refs/heads/master/web/sub.html"
