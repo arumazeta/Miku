@@ -127,6 +127,7 @@ fn link(_: Request, cx: RouteContext<Config>) -> Result<Response> {
             "path": "/ID",
             "tls": "tls",
             "sni": host,
+            "fp": "chrome",
             "alpn": "http/1.1"}
         );
         format!("vmess://{}", URL_SAFE.encode(config.to_string()))
