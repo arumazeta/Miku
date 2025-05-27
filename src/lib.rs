@@ -117,7 +117,7 @@ fn link(_: Request, cx: RouteContext<Config>) -> Result<Response> {
             "ps": "maquia vmess",
             "v": "2",
             "add": host,
-            "port": "443",
+            "port": "80",
             "id": uuid,
             "aid": "0",
             "scy": "zero",
@@ -125,7 +125,7 @@ fn link(_: Request, cx: RouteContext<Config>) -> Result<Response> {
             "type": "none",
             "host": host,
             "path": "/ID",
-            "tls": "tls",
+            "tls": "",
             "sni": host,
             "fp": "chrome",
             "alpn": "http/1.1"}
