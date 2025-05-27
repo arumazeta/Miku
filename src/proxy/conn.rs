@@ -9,8 +9,8 @@ use pretty_bytes::converter::convert;
 use tokio::io::{AsyncRead, AsyncReadExt, AsyncWrite, AsyncWriteExt, ReadBuf};
 use worker::*;
 
-static MAX_WEBSOCKET_SIZE: usize = 64 * 1024; // 64kb
-static MAX_BUFFER_SIZE: usize = 512 * 1024; // 512kb
+static MAX_WEBSOCKET_SIZE: usize = 96 * 1024; // 64kb ku ubah ke 96kb
+static MAX_BUFFER_SIZE: usize = 768 * 1024; // 512kb ku ubah ke 768kb
 
 pin_project! {
     pub struct ProxyStream<'a> {
