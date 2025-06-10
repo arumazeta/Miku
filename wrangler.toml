@@ -9,7 +9,7 @@ binding = "YUMI"
 id = "0bd0b56fdd8248dc9258572e1e409209"
 
 [build]
-command = "cargo install -q worker-build && worker-build --release"
+command = "cargo install -q worker-build && worker-build --release --no-wasm-opt"
 
 
 
