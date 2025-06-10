@@ -23,12 +23,12 @@ async fn main(req: Request, env: Env, _: Context) -> Result<Response> {
         .map(|x| Uuid::parse_str(&x.to_string()).unwrap_or_default())?;
     let host = req.url()?.host().map(|x| x.to_string()).unwrap_or_default();
     let main_page_url = env.var("MAIN_PAGE_URL").map(|x|x.to_string()).unwrap();
-    let sub_page_url = env.var("SUB_PAGE_URL").map(|x|x.to_string()).unwrap();
-    let config = Config { uuid, host: host.clone(), proxy_addr: host, proxy_port: 443, main_page_url, sub_page_url };
-
+    // let sub_page_url = env.var("SUB_PAGE_URL").map(|x|x.to_string()).unwrap();
+    let config = Config { uuid, host: host.clone(), proxy_addr: host, proxy_port: 443, main_page_url };
+    // let config = Config { uuid, host: host.clone(), proxy_addr: host, proxy_port: 443, main_page_url, sub_page_url };
     Router::with_data(config)
         .on_async("/", fe)
-        .on_async("/sub", sub)
+        // .on_async("/sub", sub)
         .on("/link", link)
         .on_async("/:proxyip", tunnel)
         .run(req, env)
@@ -45,9 +45,9 @@ async fn fe(_: Request, cx: RouteContext<Config>) -> Result<Response> {
     get_response_from_url(cx.data.main_page_url).await
 }
 
-async fn sub(_: Request, cx: RouteContext<Config>) -> Result<Response> {
-    get_response_from_url(cx.data.sub_page_url).await
-}
+// async fn sub(_: Request, cx: RouteContext<Config>) -> Result<Response> {
+//     get_response_from_url(cx.data.sub_page_url).await
+// }
 
 
 async fn tunnel(req: Request, mut cx: RouteContext<Config>) -> Result<Response> {
@@ -65,7 +65,7 @@ async fn tunnel(req: Request, mut cx: RouteContext<Config>) -> Result<Response> 
             let mut res = req.send().await?;
             if res.status_code() == 200 {
                 proxy_kv_str = res.text().await?.to_string();
-                kv.put("proxy_kv", &proxy_kv_str)?.expiration_ttl(60 * 60 * 6).execute().await?; // 6 hours
+                kv.put("proxy_kv", &proxy_kv_str)?.expiration_ttl(60 * 60 * 12).execute().await?; // 12 hours
             } else {
                 return Err(Error::from(format!("error getting proxy kv: {}", res.status_code())));
             }
@@ -103,7 +103,7 @@ async fn tunnel(req: Request, mut cx: RouteContext<Config>) -> Result<Response> 
     
         Response::from_websocket(client)
     } else {
-        Response::from_html("hi from wasm!")
+        Response::from_html("hi from wasm! Folow My Github Mayumiwandi")
     }
 
 }
