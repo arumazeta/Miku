@@ -1,0 +1,3 @@
+[build]
+# Opsi ini akan memberitahu worker-build untuk tidak menjalankan wasm-opt
+wasm-opt = false
