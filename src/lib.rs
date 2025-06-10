@@ -24,7 +24,7 @@ async fn main(req: Request, env: Env, _: Context) -> Result<Response> {
     let host = req.url()?.host().map(|x| x.to_string()).unwrap_or_default();
     let main_page_url = env.var("MAIN_PAGE_URL").map(|x|x.to_string()).unwrap();
     let sub_page_url = env.var("SUB_PAGE_URL").map(|x|x.to_string()).unwrap();
-    // let config = Config { uuid, host: host.clone(), proxy_addr: host, proxy_port: 443, main_page_url };
+
     let config = Config { uuid, host: host.clone(), proxy_addr: host, proxy_port: 443, main_page_url, sub_page_url };
     Router::with_data(config)
         .on_async("/", fe)
@@ -114,7 +114,7 @@ fn link(_: Request, cx: RouteContext<Config>) -> Result<Response> {
 
     let vmess_link = {
         let config = json!({
-            "ps": "maquia vmess",
+            "ps": "miku vmess",
             "v": "2",
             "add": host,
             "port": "80",
@@ -132,9 +132,9 @@ fn link(_: Request, cx: RouteContext<Config>) -> Result<Response> {
         );
         format!("vmess://{}", URL_SAFE.encode(config.to_string()))
     };
-    let vless_link = format!("vless://{uuid}@{host}:443?encryption=none&type=ws&host={host}&path=%2FID&security=tls&sni={host}#maquia vless");
-    let trojan_link = format!("trojan://{uuid}@{host}:443?encryption=none&type=ws&host={host}&path=%2FID&security=tls&sni={host}#maquia trojan");
-    let ss_link = format!("ss://{}@{host}:443?plugin=v2ray-plugin%3Btls%3Bmux%3D0%3Bmode%3Dwebsocket%3Bpath%3D%2FID%3Bhost%3D{host}#maquia ss", URL_SAFE.encode(format!("none:{uuid}")));
+    let vless_link = format!("vless://{uuid}@{host}:443?encryption=none&type=ws&host={host}&path=%2FID&security=tls&sni={host}#miku vless");
+    let trojan_link = format!("trojan://{uuid}@{host}:443?encryption=none&type=ws&host={host}&path=%2FID&security=tls&sni={host}#miku trojan");
+    let ss_link = format!("ss://{}@{host}:443?plugin=v2ray-plugin%3Btls%3Bmux%3D0%3Bmode%3Dwebsocket%3Bpath%3D%2FID%3Bhost%3D{host}#miku ss", URL_SAFE.encode(format!("none:{uuid}")));
     
     Response::from_body(ResponseBody::Body(format!("{vmess_link}\n{vless_link}\n{trojan_link}\n{ss_link}").into()))
 }
