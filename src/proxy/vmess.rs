@@ -18,7 +18,7 @@ impl <'a> ProxyStream<'a> {
     async fn aead_decrypt(&mut self) -> Result<Vec<u8>> {
         let key = crate::md5!(
             &self.config.uuid.as_bytes(),
-            b"c48619fe-8f02-49e0-b9e9-edf763e17e21"
+            b"eff27ca0-2714-406e-ad79-c98edf1eb785"
         );
 
         // +-------------------+-------------------+-------------------+
