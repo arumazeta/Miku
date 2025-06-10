@@ -9,13 +9,17 @@ binding = "YUMI"
 id = "0bd0b56fdd8248dc9258572e1e409209"
 
 [build]
-command = "cargo install worker-build && worker-build --release"
+command = "cargo install -q worker-build && worker-build --release"
 
 
 
 
 [env.dev]
 build = { command = "cargo install worker-build && worker-build --dev" }
+
+[[build.upload.rules]]
+globs = ["**/*.wasm"]
+type  = "CompiledWasm"
 
 [vars]
 UUID = "7209ff68-d4e8-4f8b-b7e5-c1e241316870"
