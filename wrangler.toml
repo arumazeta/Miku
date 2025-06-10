@@ -10,8 +10,7 @@ id = "0bd0b56fdd8248dc9258572e1e409209"
 
 [build]
 command = "cargo install worker-build && worker-build --release"
-[build]
-wasm_opt_flags = ["--enable-bulk-memory"]
+
 
 [env.dev]
 build = { command = "cargo install worker-build && worker-build --dev" }
